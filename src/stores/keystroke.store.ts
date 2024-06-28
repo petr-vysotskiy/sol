@@ -216,6 +216,19 @@ export const createKeystrokeStore = (root: IRootStore) => {
               }
 
               if (!root.ui.query) {
+                if (
+                  !!root.calendar.upcomingEvent &&
+                  root.calendar.upcomingEvent.eventStatus !== 3
+                ) {
+                  if (root.calendar.upcomingEvent.eventLink) {
+                    Linking.openURL(root.calendar.upcomingEvent.eventLink)
+                  } else {
+                    Linking.openURL('ical://')
+                  }
+
+                  return
+                }
+
                 return
               }
 
@@ -234,19 +247,6 @@ export const createKeystrokeStore = (root: IRootStore) => {
                   )}`,
                 )
                 solNative.hideWindow()
-                return
-              }
-
-              if (
-                !!root.calendar.upcomingEvent &&
-                root.calendar.upcomingEvent.eventStatus !== 3
-              ) {
-                if (root.calendar.upcomingEvent.eventLink) {
-                  Linking.openURL(root.calendar.upcomingEvent.eventLink)
-                } else {
-                  Linking.openURL('ical://')
-                }
-
                 return
               }
 
