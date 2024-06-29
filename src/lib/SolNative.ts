@@ -154,7 +154,7 @@ class SolNative extends NativeEventEmitter {
     this.securelyRetrieve = module.securelyRetrieve
     this.securelyStore = module.securelyStore
 
-    this.showToast = (text: string, variant = 'success', timeout = 2) =>
+    this.showToast = (text: string, variant = 'success', timeout = 4) =>
       module.showToast(text, variant, timeout)
 
     this.ls = global.__SolProxy.ls

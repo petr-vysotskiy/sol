@@ -36,8 +36,6 @@ final class Panel: NSPanel, NSWindowDelegate {
     visualEffectView.state = .active
     self.contentView?.addSubview(visualEffectView)
     self.isOpaque = false
-    // self.backgroundColor = NSColor.clear
-
   }
 
   override var canBecomeKey: Bool {

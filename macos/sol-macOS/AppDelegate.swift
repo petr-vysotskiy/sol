@@ -17,7 +17,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
   private var shiftPressed = false
   private var mainWindow: Panel!
   private var overlayWindow: Overlay!
-  private var toastWindow: Toast!
+  private var toastWindow: Panel!
   private var rootView: RCTRootView!
   private var catchHorizontalArrowsPress = false
   private var catchVerticalArrowsPress = true
@@ -127,7 +127,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     )
 
     mainWindow.contentView?.addSubview(rootView)
-    //    mainWindow.contentView?.frame = mainWindow.frame
 
     let windowRect = NSScreen.main!.frame
     overlayWindow = Overlay(
@@ -136,7 +135,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
       defer: false
     )
 
-    toastWindow = Toast(
+    toastWindow = Panel(
       contentRect: NSRect(x: 0, y: 0, width: 250, height: 30)
     )
 
@@ -560,7 +559,6 @@ class AppDelegate: NSObject, NSApplicationDelegate,
   }
 
   func showToast(_ text: String, variant: String, timeout: NSNumber?) {
-    toastWindow.center()
     guard
       let mainScreen = showWindowOn == "screenWithFrontmost"
         ? toastWindow
@@ -572,9 +570,8 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     let toastView = ToastView(text: text, variant: variant == "error" ? .error : .success)
 
     let rootView = NSHostingView(rootView: toastView)
-
     toastWindow.contentView = rootView
-    rootView.wantsLayer = true
+        rootView.wantsLayer = true
 
     if variant == "error" {
       rootView.layer?.backgroundColor =
