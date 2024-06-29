@@ -25,7 +25,7 @@ class BlurView: NSVisualEffectView {
     } else if (materialName == "sidebar") {
       material = .sidebar
     } else if (materialName == "header") {
-      material = .light
+      material = .headerView
     }
   }
 
