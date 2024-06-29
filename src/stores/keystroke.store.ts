@@ -94,7 +94,10 @@ export const createKeystrokeStore = (root: IRootStore) => {
                 solNative.killProcess(process.id.toString())
               }
               solNative.hideWindow()
-              solNative.showToast(`✅ Process "${process.processName}" killed`)
+              solNative.showToast(
+                `Process "${process.processName}" killed`,
+                'success',
+              )
               break
             }
             case Widget.CLIPBOARD: {
@@ -265,7 +268,7 @@ export const createKeystrokeStore = (root: IRootStore) => {
 
               if (item.type === ItemType.TEMPORARY_RESULT) {
                 Clipboard.setString(root.ui.temporaryResult!)
-                solNative.showToast('Copied to clipboard ✅')
+                solNative.showToast('Copied to clipboard', 'success')
                 solNative.hideWindow()
                 return
               }
@@ -303,10 +306,16 @@ export const createKeystrokeStore = (root: IRootStore) => {
                     if (canOpenURL) {
                       await Linking.openURL(item.text)
                     } else {
-                      solNative.showToast(`Could not open URL: ${item.text}`)
+                      solNative.showToast(
+                        `Could not open URL: ${item.text}`,
+                        'error',
+                      )
                     }
                   } catch (e) {
-                    solNative.showToast(`Could not open URL: ${item.text}`)
+                    solNative.showToast(
+                      `Could not open URL: ${item.text}`,
+                      'error',
+                    )
                   }
                 }
               }

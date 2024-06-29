@@ -279,7 +279,7 @@ export const createUIStore = (root: IRootStore) => {
             iconImage: Assets.Chrome,
             callback: async () => {
               if (!bookmark.url) {
-                solNative.showToast('Cannot open bookmark without url')
+                solNative.showToast('Cannot open bookmark without url', 'error')
               }
 
               try {
@@ -606,9 +606,15 @@ export const createUIStore = (root: IRootStore) => {
     setShouldHideMenuBar: (v: boolean) => {
       store.shouldHideMenubar = v
       if (v) {
-        solNative.showToast('Menubar will be blacked out, please wait...')
+        solNative.showToast(
+          'Menubar will be blacked out, please wait...',
+          'success',
+        )
       } else {
-        solNative.showToast('Done, please restore your wallpaper manually')
+        solNative.showToast(
+          'Done, please restore your wallpaper manually',
+          'success',
+        )
       }
       solNative.shouldHideMenubar(v)
     },
