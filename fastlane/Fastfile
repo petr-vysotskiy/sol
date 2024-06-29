@@ -4,47 +4,47 @@ default_platform(:mac)
 
 platform :mac do
   
-  # xcode_select "/Applications/Xcode.app"
+  xcode_select "/Applications/Xcode.app"
 
-  # lane :release do
-  #   sh("npm", "run", "bump")
+  lane :release do
+    sh("npm", "run", "bump")
 
-  #   version = get_version_number(xcodeproj: "./macos/sol.xcodeproj")
+    version = get_version_number(xcodeproj: "./macos/sol.xcodeproj")
 
-  #   path = "/Users/osp/Developer/sol/"
-  #   appFileName = path + "Sol.app"
-  #   zipFileName = path + "releases/" + version + ".zip"
+    path = "/Users/osp/Developer/sol/"
+    appFileName = path + "Sol.app"
+    zipFileName = path + "releases/" + version + ".zip"
     
-  #   gym(
-  #     scheme: "release",
-  #     configuration: "Release",
-  #     clean: true,
-  #     workspace: "./macos/sol.xcworkspace",
-  #     output_directory: path,
-  #     export_method: "developer-id"
-  #   )
+    gym(
+      scheme: "release",
+      configuration: "Release",
+      clean: true,
+      workspace: "./macos/sol.xcworkspace",
+      output_directory: path,
+      export_method: "developer-id"
+    )
 
-  #   notarize(
-  #     package: appFileName,
-  #     bundle_id: "com.ospfranco.sol",
-  #     username: "ospfranco@protonmail.com",
-  #     asc_provider: "24CMR7378R"
-  #   )
+    notarize(
+      package: appFileName,
+      bundle_id: "com.ospfranco.sol",
+      username: "ospfranco@protonmail.com",
+      asc_provider: "24CMR7378R"
+    )
 
-  #   zip(
-  #     path: appFileName,
-  #     output_path: zipFileName,
-  #     symlinks: true
-  #   )
+    zip(
+      path: appFileName,
+      output_path: zipFileName,
+      symlinks: true
+    )
 
-  #   sh("npm", "run", "appcast")
+    sh("npm", "run", "appcast")
 
-  #   puts Dir.pwd
-  #   Dir.chdir("..") do
-  #     sh("git", "add", ".")
-  #     sh("git", "commit", "-m", version)
-  #     sh("git", "push")
-  #   end
+    puts Dir.pwd
+    Dir.chdir("..") do
+      sh("git", "add", ".")
+      sh("git", "commit", "-m", version)
+      sh("git", "push")
+    end
 
     sh("cp", "-R", appFileName, "/Applications/")
 
