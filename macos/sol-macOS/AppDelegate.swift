@@ -123,11 +123,11 @@ class AppDelegate: NSObject, NSApplicationDelegate,
         y: 0,
         width: baseSize.width,
         height: baseSize.height
-      ),
-      backing: .buffered, defer: false
+      )
     )
 
-    mainWindow.contentView = rootView
+    mainWindow.contentView?.addSubview(rootView)
+    //    mainWindow.contentView?.frame = mainWindow.frame
 
     let windowRect = NSScreen.main!.frame
     overlayWindow = Overlay(
@@ -137,9 +137,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     )
 
     toastWindow = Toast(
-      contentRect: NSRect(x: 0, y: 0, width: 250, height: 30),
-      backing: .buffered,
-      defer: false
+      contentRect: NSRect(x: 0, y: 0, width: 250, height: 30)
     )
 
     setupKeyboardListeners()
@@ -404,14 +402,14 @@ class AppDelegate: NSObject, NSApplicationDelegate,
   }
 
   @objc func hideWindow() {
-//        #if !DEBUG
+    //        #if !DEBUG
     if mainWindow.isVisible {
       overlayWindow.orderOut(self)
       mainWindow.orderOut(self)
       SolEmitter.sharedInstance.onHide()
       settingsHotKey.isPaused = true
     }
-//        #endif
+    //        #endif
   }
 
   func setHorizontalArrowCatch(catchHorizontalArrowPress: Bool) {
@@ -561,7 +559,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     }
   }
 
-  func showToast(_ text: String, timeout: NSNumber?) {
+  func showToast(_ text: String, variant: String, timeout: NSNumber?) {
     toastWindow.center()
     guard
       let mainScreen = showWindowOn == "screenWithFrontmost"
@@ -571,20 +569,36 @@ class AppDelegate: NSObject, NSApplicationDelegate,
       return
     }
 
-    toastWindow.setFrameOrigin(
-      NSPoint(
-        x: toastWindow.frame.origin.x,
-        y: mainScreen.frame.origin.y + mainScreen.frame.size.height * 0.1
-      ))
-    toastWindow.makeKeyAndOrderFront(nil)
-
-    let toastView = ToastView(text: text)
+    let toastView = ToastView(text: text, variant: variant == "error" ? .error : .success)
 
     let rootView = NSHostingView(rootView: toastView)
 
     toastWindow.contentView = rootView
+    rootView.wantsLayer = true
+
+    if variant == "error" {
+      rootView.layer?.backgroundColor =
+        NSColor(calibratedRed: 1, green: 0, blue: 0, alpha: 0.1).cgColor
+      rootView.layer?.borderColor = NSColor(calibratedRed: 1, green: 0, blue: 0, alpha: 0.3).cgColor
+    } else {
+      rootView.layer?.borderColor =
+        NSColor(calibratedRed: 0, green: 1, blue: 0.5, alpha: 0.3).cgColor
+      rootView.layer?.backgroundColor =
+        NSColor(calibratedRed: 0, green: 1, blue: 0.5, alpha: 0.1).cgColor
+    }
+
+    rootView.layer?.borderWidth = 1.0
+    rootView.layer?.cornerRadius = 10.0
+    rootView.layer?.masksToBounds = true
 
     let deadline = timeout != nil ? DispatchTime.now() + timeout!.doubleValue : .now() + 2
+
+    toastWindow.setFrameOrigin(
+      NSPoint(
+        x: mainScreen.frame.size.width / 2 - toastWindow.frame.width / 2,
+        y: mainScreen.frame.origin.y + mainScreen.frame.size.height * 0.1
+      ))
+    toastWindow.makeKeyAndOrderFront(nil)
 
     DispatchQueue.main.asyncAfter(deadline: deadline) {
       self.toastWindow.orderOut(nil)

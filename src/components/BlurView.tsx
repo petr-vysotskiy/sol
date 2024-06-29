@@ -9,6 +9,7 @@ type BlurViewProps = {
   style?: ViewStyle
   borderRadius?: number
   disabled?: boolean
+  materialName?: 'windowBackground' | 'menu' | 'sidebar' | 'header'
   className?: string
 }
 

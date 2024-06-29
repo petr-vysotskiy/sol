@@ -1,7 +1,5 @@
 import {solNative} from 'lib/SolNative'
 
-const config = require('../tailwind.config.js')
-
 function hexToRgb(hex: string) {
   var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
   return result
@@ -13,10 +11,12 @@ function hexToRgb(hex: string) {
     : null
 }
 
-config.theme.extend.colors.accent = solNative.accentColor
-const accentRbg = hexToRgb(solNative.accentColor)
-const accentDim = `rgba(${accentRbg?.r},${accentRbg?.g},${accentRbg?.b}, 0.6)`
-const accentBg = `rgba(${accentRbg?.r},${accentRbg?.g},${accentRbg?.b}, 0.4)`
+export const accentRgb = hexToRgb(solNative.accentColor)
 
-config.theme.extend.colors.accentDim = accentDim
-config.theme.extend.colors.accentBg = accentBg
+// config.theme.extend.colors.accent = solNative.accentColor
+// const accentRbg = hexToRgb(solNative.accentColor)
+// const accentDim = `rgba(${accentRbg?.r},${accentRbg?.g},${accentRbg?.b}, 0.6)`
+// const accentBg = `rgba(${accentRbg?.r},${accentRbg?.g},${accentRbg?.b}, 0.4)`
+
+// config.theme.extend.colors.accentDim = accentDim
+// config.theme.extend.colors.accentBg = accentBg

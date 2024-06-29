@@ -35,9 +35,11 @@ class SolNative: RCTEventEmitter {
   }
 
   func sendKeyDown(characters: String) {
-    sendEvent(withName: "keyDown", body: [
-      "key": characters,
-    ])
+    sendEvent(
+      withName: "keyDown",
+      body: [
+        "key": characters
+      ])
   }
 
   @objc override func supportedEvents() -> [String]? {
@@ -130,8 +132,11 @@ class SolNative: RCTEventEmitter {
       } else {
         let bitmap = NSBitmapImageRep(data: imageData!)
         let data = bitmap?.representation(using: .jpeg, properties: [:])
-        let base64 = data != nil ? "data:image/jpeg;base64," + data!
-          .base64EncodedString() : nil
+        let base64 =
+          data != nil
+          ? "data:image/jpeg;base64,"
+            + data!
+            .base64EncodedString() : nil
         resolve([
           "title": information["kMRMediaRemoteNowPlayingInfoTitle"],
           "artist": information["kMRMediaRemoteNowPlayingInfoArtist"],
@@ -174,7 +179,7 @@ class SolNative: RCTEventEmitter {
     rejecter _: RCTPromiseRejectBlock
   ) {
     let options: NSDictionary = [
-      kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true,
+      kAXTrustedCheckOptionPrompt.takeRetainedValue() as NSString: true
     ]
     let accessibilityEnabled = AXIsProcessTrustedWithOptions(options)
     resolve(accessibilityEnabled)
@@ -307,9 +312,9 @@ class SolNative: RCTEventEmitter {
     return resolve(value)
   }
 
-  @objc func showToast(_ text: String, timeout: NSNumber) {
+  @objc func showToast(_ text: String, variant: String, timeout: NSNumber) {
     DispatchQueue.main.async {
-      self.appDelegate?.showToast(text, timeout: timeout)
+      self.appDelegate?.showToast(text, variant: variant, timeout: timeout)
     }
   }
 
@@ -358,8 +363,10 @@ class SolNative: RCTEventEmitter {
       self.appDelegate?.setMediaKeyForwardingEnabled(v)
     }
   }
-  
-  @objc func openFilePicker(_ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock) {
+
+  @objc func openFilePicker(
+    _ resolve: @escaping RCTPromiseResolveBlock, reject: @escaping RCTPromiseRejectBlock
+  ) {
     DispatchQueue.main.async {
       let panel = NSOpenPanel()
       panel.allowsMultipleSelection = false
@@ -373,5 +380,5 @@ class SolNative: RCTEventEmitter {
       }
     }
   }
-  
+
 }

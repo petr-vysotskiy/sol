@@ -1,9 +1,10 @@
 import clsx from 'clsx'
-import {BlurView} from 'components/BlurView'
 import {FullCalendar} from 'components/FullCalendar'
 import {PermissionsBar} from 'components/PermissionsBar'
+import {solNative} from 'lib/SolNative'
 import {observer} from 'mobx-react-lite'
-import React from 'react'
+import React, {useEffect} from 'react'
+import {View} from 'react-native'
 import {useStore} from 'store'
 import {Widget} from 'stores/ui.store'
 import {ClipboardWidget} from 'widgets/clipboard.widget'
@@ -20,100 +21,85 @@ import {TranslationWidget} from 'widgets/translation.widget'
 export let RootContainer = observer(() => {
   let store = useStore()
   let widget = store.ui.focusedWidget
-  let blurDisabled = store.ui.reduceTransparency
+
+  useEffect(() => {
+    solNative.setWindowHeight(store.ui.windowHeight)
+  }, [store.ui.windowHeight])
 
   if (widget === Widget.FILE_SEARCH) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <FileSearchWidget />
-      </BlurView>
+      </View>
     )
   }
   if (widget === Widget.CLIPBOARD) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <ClipboardWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.EMOJIS) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <EmojisWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.SCRATCHPAD) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <ScratchpadWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.CREATE_ITEM) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <CreateItemWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.ONBOARDING) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <OnboardingWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.TRANSLATION) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <TranslationWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.SETTINGS) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <SettingsWidget />
-      </BlurView>
+      </View>
     )
   }
 
   if (widget === Widget.PROCESSES) {
     return (
-      <BlurView
-        disabled={blurDisabled}
-        className="flex-1 rounded-lg border-window">
+      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
         <ProcessesWidget />
-      </BlurView>
+      </View>
     )
   }
 
   return (
-    <BlurView
-      className={clsx('rounded-lg border border-window', {
+    <View
+      className={clsx('bg-neutral-50/50 dark:bg-neutral-950/50', {
         'h-full':
           !!store.ui.query ||
           (store.ui.calendarEnabled &&
@@ -124,6 +110,6 @@ export let RootContainer = observer(() => {
       {!store.ui.query && store.ui.calendarEnabled && <FullCalendar />}
 
       <PermissionsBar />
-    </BlurView>
+    </View>
   )
 })

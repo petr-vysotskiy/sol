@@ -374,7 +374,8 @@ export function createBaseItems(store: IRootStore) {
           await Linking.openURL('~/Developer')
         } catch (e) {
           solNative.showToast(
-            '🟥 Developer folder not found, try creating ~/Developer 😉',
+            'Developer folder not found, try creating ~/Developer 😉',
+            'error',
           )
         }
       },
@@ -459,7 +460,7 @@ export function createBaseItems(store: IRootStore) {
           'rm -rf ~/Library/Developer/Xcode/DerivedData',
         )
 
-        solNative.showToast('✅ Cleared')
+        solNative.showToast('Cleared', 'success')
       },
     },
     {
@@ -469,7 +470,7 @@ export function createBaseItems(store: IRootStore) {
       callback: async () => {
         const id = nanoid()
         solNative.pasteToFrontmostApp(id)
-        solNative.showToast('✅ Generated and pasted')
+        solNative.showToast('Generated and pasted', 'success')
       },
     },
     {
@@ -479,7 +480,7 @@ export function createBaseItems(store: IRootStore) {
       callback: async () => {
         const id = uuidv4()
         solNative.pasteToFrontmostApp(id)
-        solNative.showToast('✅ Generated and pasted')
+        solNative.showToast('Generated and pasted', 'success')
       },
     },
     {
@@ -489,7 +490,7 @@ export function createBaseItems(store: IRootStore) {
       callback: async () => {
         const paragraph = chance.paragraph()
         solNative.pasteToFrontmostApp(paragraph)
-        solNative.showToast('✅ Generated')
+        solNative.showToast('Generated', 'success')
       },
     },
     {
@@ -510,10 +511,10 @@ export function createBaseItems(store: IRootStore) {
           try {
             latestString = JSON.parse(latestString)
             solNative.pasteToFrontmostApp(JSON.stringify(latestString, null, 2))
-            solNative.showToast('Pasted! ✅')
+            solNative.showToast('Pasted!', 'success')
           } catch (e) {
             solNative.pasteToFrontmostApp(latestString)
-            solNative.showToast('Not a valid JSON ❌')
+            solNative.showToast('Not a valid JSON', 'error')
           }
       },
     },
@@ -550,15 +551,13 @@ export function createBaseItems(store: IRootStore) {
         try {
           const password = solNative.getWifiPassword()
           if (!password) {
-            solNative.showToast(
-              `🟥 Could not retrieve password, no password found`,
-            )
+            solNative.showToast(`No password found`, 'error')
             return
           }
           Clipboard.setString(password)
-          solNative.showToast('✅ Password copied to clipboard')
+          solNative.showToast('Password copied to clipboard', 'success')
         } catch (e) {
-          solNative.showToast(`🟥 Could not retrieve password: ${e}`)
+          solNative.showToast(`Could not retrieve password: ${e}`, 'error')
         }
       },
     },
@@ -571,13 +570,13 @@ export function createBaseItems(store: IRootStore) {
         try {
           const password = solNative.getWifiPassword()
           if (!password) {
-            solNative.showToast(`🟥 Could not retrieve password`)
+            solNative.showToast(`Could not retrieve password`, 'success')
             return
           }
           Clipboard.setString(password)
-          solNative.showToast(`${password}`, 30)
+          solNative.showToast(`${password}`, 'success', 30)
         } catch (e) {
-          solNative.showToast(`🟥 Could not retrieve password: ${e}`)
+          solNative.showToast(`Could not retrieve password: ${e}`, 'error')
         }
       },
     },
@@ -609,11 +608,23 @@ export function createBaseItems(store: IRootStore) {
 
     items.push({
       icon: '🍞',
-      name: 'Test toast',
+      name: 'Success toast',
       type: ItemType.CONFIGURATION,
       callback: () => {
         solNative.showToast(
           'This is a Toast test with a long test to make sure everything fits! 🍞',
+          'success',
+        )
+      },
+    })
+    items.push({
+      icon: '🍞',
+      name: 'error toast',
+      type: ItemType.CONFIGURATION,
+      callback: () => {
+        solNative.showToast(
+          'This is a Toast test with a long test to make sure everything fits! 🍞',
+          'error',
         )
       },
     })

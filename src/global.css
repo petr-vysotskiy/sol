@@ -10,22 +10,12 @@
     @apply text-neutral-700 dark:text-neutral-400;
   }
   .highlight {
-    @apply bg-lightHighlight dark:bg-darkHighlight;
+    @apply bg-accent dark:bg-accent-dark;
   }
-
   .border-color {
     @apply border-lightBorder dark:border-darkBorder;
   }
-
   .subBg {
     @apply bg-subBgLight dark:bg-subBgDark;
-  }
-
-  .input {
-    @apply bg-inputLight dark:bg-inputDark;
-  }
-
-  .border-window {
-    @apply border-lightWindowBorder dark:border-darkWindowBorder;
   }
 }

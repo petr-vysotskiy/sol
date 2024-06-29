@@ -5,5 +5,6 @@
   RCT_EXPORT_VIEW_PROPERTY(endColor,NSString)
   RCT_EXPORT_VIEW_PROPERTY(cornerRadius,double)
   RCT_EXPORT_VIEW_PROPERTY(disabled, BOOL)
+  RCT_EXPORT_VIEW_PROPERTY(materialName, NSString)
 @end
 

@@ -22,7 +22,6 @@
 		701086A727989798004C8CCD /* SolEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701086A627989798004C8CCD /* SolEmitter.swift */; };
 		701EC4612822E33B00597D99 /* AccessibilityElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 701EC4602822E33B00597D99 /* AccessibilityElement.swift */; };
 		7034504028238AAB00240BDD /* ScreenDetector.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7034503F28238AAB00240BDD /* ScreenDetector.swift */; };
-		703D78B72916924300F741F0 /* SentryHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 703D78B62916924300F741F0 /* SentryHelper.m */; };
 		703EB24D2BED4E1E00F7B391 /* NSString+Score.m in Sources */ = {isa = PBXBuildFile; fileRef = 703EB24C2BED4E1E00F7B391 /* NSString+Score.m */; };
 		7042A22A2815C06B00874743 /* NSColor.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7042A2292815C06B00874743 /* NSColor.extension.swift */; };
 		7047E80627D4D31400582E1B /* MediaHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7047E80527D4D31400582E1B /* MediaHelper.swift */; };
@@ -82,8 +81,6 @@
 		701086A82798C231004C8CCD /* sol-macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "sol-macOS.entitlements"; sourceTree = "<group>"; };
 		701EC4602822E33B00597D99 /* AccessibilityElement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityElement.swift; sourceTree = "<group>"; };
 		7034503F28238AAB00240BDD /* ScreenDetector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenDetector.swift; sourceTree = "<group>"; };
-		703D78B62916924300F741F0 /* SentryHelper.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SentryHelper.m; sourceTree = "<group>"; };
-		703D78B82916933F00F741F0 /* SentryHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SentryHelper.h; sourceTree = "<group>"; };
 		703EB24C2BED4E1E00F7B391 /* NSString+Score.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = "NSString+Score.m"; sourceTree = "<group>"; };
 		703EB24E2BED4E3C00F7B391 /* NSString+Score.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "NSString+Score.h"; sourceTree = "<group>"; };
 		7042A2292815C06B00874743 /* NSColor.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSColor.extension.swift; sourceTree = "<group>"; };
@@ -246,8 +243,6 @@
 				7074A3A128BDCB6B0032ADD7 /* CalendarHelper.mm */,
 				7074A3A328BDCBBD0032ADD7 /* CalendarHelper.h */,
 				70EFF77328D5F732009FE998 /* DoNotDisturb.swift */,
-				703D78B62916924300F741F0 /* SentryHelper.m */,
-				703D78B82916933F00F741F0 /* SentryHelper.h */,
 				70B9275E2930A4F700F883A0 /* ShellHelper.swift */,
 				70E15D072931FC57007FFE5F /* FS.swift */,
 				70E15D09293290E9007FFE5F /* JSIUtils.mm */,
@@ -478,13 +473,13 @@
 				"${PODS_ROOT}/Target Support Files/Pods-macOS/Pods-macOS-resources.sh",
 				"${PODS_CONFIGURATION_BUILD_DIR}/RNCAsyncStorage/RNCAsyncStorage_resources.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/React-Core/RCTI18nStrings.bundle",
-				"${PODS_ROOT}/Sentry/Sources/Resources/PrivacyInfo.xcprivacy",
+				"${PODS_CONFIGURATION_BUILD_DIR}/Sentry/Sentry.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RNCAsyncStorage_resources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RCTI18nStrings.bundle",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PrivacyInfo.xcprivacy",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sentry.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -560,7 +555,6 @@
 				700A18DA279DC17F0096C830 /* FileIcon.swift in Sources */,
 				70754B532BECECAB00B77EF8 /* FileSearch.mm in Sources */,
 				70BED7CB27F4C1A600906E41 /* FileConstants.swift in Sources */,
-				703D78B72916924300F741F0 /* SentryHelper.m in Sources */,
 				70E80B5F294C6EDE0094F1B5 /* MetadataExtractorError.swift in Sources */,
 				70B2D5902824254B0005D80A /* WindowManager.swift in Sources */,
 			);

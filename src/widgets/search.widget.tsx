@@ -3,6 +3,7 @@ import clsx from 'clsx'
 import {FileIcon} from 'components/FileIcon'
 import {Key} from 'components/Key'
 import {MainInput} from 'components/MainInput'
+import {solNative} from 'lib/SolNative'
 import {observer} from 'mobx-react-lite'
 import React, {FC, useEffect, useRef} from 'react'
 import {FlatList, Image, Platform, Text, View, ViewStyle} from 'react-native'
@@ -13,6 +14,9 @@ type Props = {
   style?: ViewStyle
   className?: string
 }
+
+const accentColor = solNative.accentColor + '33'
+const borderAccentColor = solNative.accentColor + '50'
 
 export const SearchWidget: FC<Props> = observer(() => {
   const store = useStore()
@@ -53,8 +57,10 @@ export const SearchWidget: FC<Props> = observer(() => {
 
     return (
       <View
-        className={clsx('flex-row items-center rounded-lg py-2', {
-          highlight: isActive,
+        className={clsx('flex-row items-center rounded-lg py-2 ', {
+          'bg-accent': isActive,
+          // 'border-accent2': isActive,
+          // 'border-transparent': !isActive,
         })}>
         <View className="flex-1 flex-row items-center px-6 h-9">
           {item.type === ItemType.PREFERENCE_PANE && (

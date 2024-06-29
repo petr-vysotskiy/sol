@@ -2,16 +2,31 @@ import Cocoa
 
 class BlurView: NSVisualEffectView {
   @objc var borderRadius: Double = 0
-  @objc var disabled: Bool = false
   @objc var inViewBlur: Bool = false
+  @objc var disabled: Bool = false
+  @objc var materialName: String = "windowBackground"
 
   override var isFlipped: Bool {
     return true
   }
 
   override func didSetProps(_: [String]!) {
+    if(disabled) {
+      material = .fullScreenUI
+      blendingMode = .withinWindow
+      return
+    }
+    
     layer?.cornerRadius = borderRadius
-    material = disabled ? .windowBackground : .headerView
+    if(materialName == "windowBackground") {
+      material = .windowBackground
+    } else if (materialName == "menu") {
+      material = .menu
+    } else if (materialName == "sidebar") {
+      material = .sidebar
+    } else if (materialName == "header") {
+      material = .light
+    }
   }
 
   override func convert(_ point: NSPoint, from _: NSView?) -> NSPoint {
@@ -20,10 +35,23 @@ class BlurView: NSVisualEffectView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    if(disabled) {
+      material = .fullScreenUI
+      blendingMode = .withinWindow
+      return
+    }
 
-    material = inViewBlur ? .menu : .sidebar
-    material = disabled ? .windowBackground : material
-
+    if(materialName == "windowBackground") {
+      material = .windowBackground
+    } else if (materialName == "menu") {
+      material = .menu
+    } else if (materialName == "sidebar") {
+      material = .sidebar
+    } else if (materialName == "header") {
+      material = .headerView
+    }
+    
     wantsLayer = true
     layer?.cornerRadius = borderRadius
     layer?.masksToBounds = true

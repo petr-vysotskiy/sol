@@ -1,10 +1,11 @@
 import {observer} from 'mobx-react-lite'
-import {View, useColorScheme} from 'react-native'
+import {Image, View, useColorScheme} from 'react-native'
 import {TextInput} from 'react-native-macos'
 import {useStore} from 'store'
 import colors from 'tailwindcss/colors'
 import {Widget} from 'stores/ui.store'
 import {BackButton} from './BackButton'
+import {Assets} from 'assets'
 
 type Props = {
   placeholder?: string
@@ -19,7 +20,7 @@ export const MainInput = observer<Props>(
     const colorScheme = useColorScheme()
 
     return (
-      <View className="min-h-[42px] max-h-[200px] px-3 flex-row items-center gap-1 m-2 rounded-lg flex-1 input">
+      <View className="min-h-[42px] max-h-[200px] px-3 flex-row items-center gap-2 m-1 flex-1">
         {showBackButton && (
           <BackButton
             onPress={() => {
@@ -28,18 +29,32 @@ export const MainInput = observer<Props>(
             }}
           />
         )}
+        {!showBackButton && (
+          <View>
+            <Image
+              source={Assets.Logo}
+              className="w-6 h-6"
+              tintColor={
+                colorScheme === 'dark'
+                  ? colors.neutral[400]
+                  : colors.neutral[600]
+              }
+            />
+          </View>
+        )}
         <TextInput
           autoFocus
           enableFocusRing={false}
           value={store.ui.query}
           onChangeText={store.ui.setQuery}
           // @ts-ignore
-          className="text-2xl flex-1 -mb-1"
-          multiline
+          className="text-lg flex-1"
+          cursorColor={colorScheme === 'dark' ? colors.white : colors.black}
+          // multiline
+          placeholder={placeholder}
           placeholderTextColor={
             colorScheme === 'dark' ? colors.neutral[500] : colors.neutral[400]
           }
-          placeholder={placeholder}
         />
       </View>
     )

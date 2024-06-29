@@ -2,7 +2,6 @@
 #import "CalendarHelper.h"
 #import "FileSearch.h"
 #import "JSIUtils.h"
-#import "SentryHelper.h"
 #include "SolMacros.h"
 #import "processes.h"
 #import <Cocoa/Cocoa.h>
