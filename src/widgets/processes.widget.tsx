@@ -39,7 +39,7 @@ export const ProcessesWidget: FC<Props> = observer(({style}) => {
 
   return (
     <View className="flex-1 " style={style}>
-      <View className="flex-row">
+      <View className="flex-row px-3">
         <MainInput placeholder="Search processes..." showBackButton />
       </View>
       <FlatList

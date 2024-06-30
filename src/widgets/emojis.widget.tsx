@@ -42,7 +42,7 @@ export const EmojisWidget: FC<Props> = observer(({style}) => {
 
   return (
     <View className="h-full" style={style}>
-      <View className="flex-row">
+      <View className="flex-row px-3">
         <MainInput placeholder="Search emojis..." showBackButton />
       </View>
       <FlatList

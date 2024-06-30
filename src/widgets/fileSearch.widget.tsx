@@ -32,7 +32,7 @@ export const FileSearchWidget: FC<Props> = observer(({style}) => {
 
   return (
     <View className="flex-1 " style={style}>
-      <View className="flex-row">
+      <View className="flex-row px-3">
         <MainInput placeholder="Search for files..." showBackButton />
       </View>
       <FlatList

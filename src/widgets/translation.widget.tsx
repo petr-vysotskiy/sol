@@ -32,7 +32,7 @@ export const TranslationWidget: FC<Props> = observer(({style}) => {
 
   return (
     <View className="flex-1" style={style}>
-      <View className="flex-row items-center">
+      <View className="flex-row px-3">
         <MainInput placeholder="Translate..." showBackButton />
       </View>
 
