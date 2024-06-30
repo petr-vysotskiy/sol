@@ -251,6 +251,16 @@ export const createKeystrokeStore = (root: IRootStore) => {
 
               // If there are no items, or if the query is a meta query, open a google search
               if (!root.ui.items.length || meta) {
+                if (store.commandPressed) {
+                  Linking.openURL(
+                    `https://perplexity.ai?q=${encodeURIComponent(
+                      root.ui.query,
+                    )}`,
+                  )
+                  solNative.hideWindow()
+                  return
+                }
+
                 Linking.openURL(
                   `https://google.com/search?q=${encodeURIComponent(
                     root.ui.query,

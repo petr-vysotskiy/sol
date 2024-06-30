@@ -15,9 +15,6 @@ type Props = {
   className?: string
 }
 
-const accentColor = solNative.accentColor + '33'
-const borderAccentColor = solNative.accentColor + '50'
-
 export const SearchWidget: FC<Props> = observer(() => {
   const store = useStore()
   const focused = store.ui.focusedWidget === Widget.SEARCH
@@ -184,6 +181,19 @@ export const SearchWidget: FC<Props> = observer(() => {
             <Text className="text-xs darker-text mr-1">Translate</Text>
             <Key symbol={'⇧'} />
             <Key symbol={'⏎'} />
+            {!items.length && (
+              <>
+                <View className="mx-2" />
+                <Text
+                  className={clsx('text-xs darker-text mr-1', {
+                    'font-semibold': !items.length,
+                  })}>
+                  Search Perplexity
+                </Text>
+                <Key symbol={'⌘'} />
+                <Key symbol={'⏎'} />
+              </>
+            )}
             <View className="mx-2" />
             <Text
               className={clsx('text-xs darker-text mr-1', {
