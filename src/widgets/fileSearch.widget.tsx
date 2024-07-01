@@ -1,6 +1,7 @@
 import clsx from 'clsx'
 import {FileIcon} from 'components/FileIcon'
 import {Key} from 'components/Key'
+import {LoadingBar} from 'components/LoadingBar'
 import {MainInput} from 'components/MainInput'
 import {useFullSize} from 'hooks/useFullSize'
 import {observer} from 'mobx-react-lite'
@@ -35,6 +36,7 @@ export const FileSearchWidget: FC<Props> = observer(({style}) => {
       <View className="flex-row px-3">
         <MainInput placeholder="Search for files..." showBackButton />
       </View>
+      <LoadingBar />
       <FlatList
         data={data}
         className="flex-1"

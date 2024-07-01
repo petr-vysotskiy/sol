@@ -221,16 +221,23 @@ export const createUIStore = (root: IRootStore) => {
     },
     get files(): Item[] {
       if (!!store.query && store.focusedWidget === Widget.FILE_SEARCH) {
+        runInAction(() => {
+          store.isLoading = true
+        })
         const fileResults = solNative.searchFiles(
           toJS(store.searchFolders),
           store.query,
         )
 
-        return fileResults.map(f => ({
+        const results = fileResults.map(f => ({
           type: ItemType.FILE,
           name: f.name,
           url: f.path,
         }))
+        runInAction(() => {
+          store.isLoading = false
+        })
+        return results
       } else {
         return []
       }
@@ -285,7 +292,7 @@ export const createUIStore = (root: IRootStore) => {
               try {
                 await Linking.openURL(bookmark.url)
               } catch (e) {
-                console.error('Could not open url', e)
+                solNative.showToast(`Could not open url: ${e}`, 'error')
               }
             },
           }

@@ -1,5 +1,11 @@
 import {observer} from 'mobx-react-lite'
-import {Image, View, useColorScheme} from 'react-native'
+import {
+  DevSettings,
+  Image,
+  TouchableOpacity,
+  View,
+  useColorScheme,
+} from 'react-native'
 import {TextInput} from 'react-native-macos'
 import {useStore} from 'store'
 import colors from 'tailwindcss/colors'
@@ -24,6 +30,9 @@ export const MainInput = observer<Props>(
   }) => {
     const store = useStore()
     const colorScheme = useColorScheme()
+    const reloadApp = async () => {
+      DevSettings.reload()
+    }
 
     let leftButton = null
     if (showBackButton) {
@@ -39,13 +48,15 @@ export const MainInput = observer<Props>(
 
     if (!showBackButton) {
       leftButton = (
-        <Image
-          source={Assets.Logo}
-          className="w-6 h-6"
-          tintColor={
-            colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[600]
-          }
-        />
+        <TouchableOpacity onPress={reloadApp}>
+          <Image
+            source={Assets.Logo}
+            className="w-6 h-6"
+            tintColor={
+              colorScheme === 'dark' ? colors.neutral[400] : colors.neutral[600]
+            }
+          />
+        </TouchableOpacity>
       )
     }
 
@@ -54,7 +65,7 @@ export const MainInput = observer<Props>(
     }
 
     return (
-      <View className="min-h-[42px] max-h-[200px] flex-row items-center gap-2 my-1 flex-1">
+      <View className="min-h-[42px] flex-row items-center gap-2 my-1 flex-1">
         {leftButton}
         <TextInput
           autoFocus
@@ -65,9 +76,6 @@ export const MainInput = observer<Props>(
           className="text-lg flex-1"
           cursorColor={colorScheme === 'dark' ? colors.white : colors.black}
           placeholder={placeholder}
-          placeholderTextColor={
-            colorScheme === 'dark' ? colors.neutral[500] : colors.neutral[400]
-          }
         />
       </View>
     )

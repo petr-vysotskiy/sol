@@ -5,10 +5,8 @@ import {useFullSize} from 'hooks/useFullSize'
 import {solNative} from 'lib/SolNative'
 import {observer} from 'mobx-react-lite'
 import React, {FC, useEffect} from 'react'
-import {Text, TextInput, View, ViewStyle, useColorScheme} from 'react-native'
-import {TouchableOpacity} from 'react-native-macos'
+import {Text, TextInput, View, ViewStyle} from 'react-native'
 import {useStore} from 'store'
-import {ScratchPadColor} from 'stores/ui.store'
 import colors from 'tailwindcss/colors'
 
 interface Props {
@@ -33,7 +31,6 @@ const BG_COLORS = {
 
 export const ScratchpadWidget: FC<Props> = observer(({style}) => {
   let store = useStore()
-  let isDarkMode = useColorScheme() === 'dark'
   useFullSize()
 
   useEffect(() => {
@@ -47,7 +44,7 @@ export const ScratchpadWidget: FC<Props> = observer(({style}) => {
 
   return (
     <GradientView
-      className="flex-1 pt-4"
+      className="flex-1"
       startColor={BG_COLORS[store.ui.scratchPadColor].start}
       endColor={BG_COLORS[store.ui.scratchPadColor].end}
       angle={45}>
@@ -62,12 +59,12 @@ export const ScratchpadWidget: FC<Props> = observer(({style}) => {
           fontFamily: 'Avenir',
         }}
         placeholder="Write something..."
-        className="flex-1 p-4"
+        className="flex-1 p-4 -mt-5"
         multiline
         spellCheck
       />
-      <View className="flex-row gap-1 subBg justify-end px-4 py-2">
-        <Text className={clsx('text-xs darker-text mr-1')}>Switch themes</Text>
+      <View className="flex-row gap-2 subBg justify-end px-4 py-2">
+        <Text className={clsx('text-xs darker-text')}>Switch themes</Text>
         <Key symbol={'tab'} />
       </View>
     </GradientView>

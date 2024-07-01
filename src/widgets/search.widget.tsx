@@ -2,8 +2,8 @@ import {Assets, Icons} from 'assets'
 import clsx from 'clsx'
 import {FileIcon} from 'components/FileIcon'
 import {Key} from 'components/Key'
+import {LoadingBar} from 'components/LoadingBar'
 import {MainInput} from 'components/MainInput'
-import {solNative} from 'lib/SolNative'
 import {observer} from 'mobx-react-lite'
 import React, {FC, useEffect, useRef} from 'react'
 import {FlatList, Image, Platform, Text, View, ViewStyle} from 'react-native'
@@ -54,10 +54,10 @@ export const SearchWidget: FC<Props> = observer(() => {
 
     return (
       <View
-        className={clsx('flex-row items-center rounded-lg py-2 ', {
+        className={clsx('flex-row items-center rounded-lg py-1 border', {
           'bg-accent': isActive,
-          // 'border-accent2': isActive,
-          // 'border-transparent': !isActive,
+          'border-accent': isActive,
+          'border-transparent': !isActive,
         })}>
         <View className="flex-1 flex-row items-center px-6 h-9">
           {item.type === ItemType.PREFERENCE_PANE && (
@@ -68,13 +68,9 @@ export const SearchWidget: FC<Props> = observer(() => {
             <Text className="text-xxs absolute darker-text left-2">↗</Text>
           )}
           {item.isRunning && (
-            <View className="absolute left-2.5 h-1.5 w-1.5 rounded-full bg-neutral-600 dark:bg-neutral-400" />
+            <View className="absolute left-2.5 h-[6px] w-[6px] rounded-full bg-neutral-600 dark:bg-neutral-400" />
           )}
-          {!!item.url && (
-            <View className="gap-1 items-center flex-row">
-              <FileIcon url={item.url} className={'w-6 h-6'} />
-            </View>
-          )}
+          {!!item.url && <FileIcon url={item.url} className={'w-6 h-6'} />}
           {item.type !== ItemType.CUSTOM && !!item.icon && (
             <Text>{item.icon}</Text>
           )}
@@ -150,10 +146,11 @@ export const SearchWidget: FC<Props> = observer(() => {
 
       {!!store.ui.query && (
         <>
+          <LoadingBar />
           <FlatList
             className="flex-1"
             windowSize={8}
-            contentContainerClassName="flex-grow pb-2 pt-1 px-2"
+            contentContainerClassName="flex-grow p-2"
             ref={listRef}
             onScrollToIndexFailed={() => {}}
             data={items}
