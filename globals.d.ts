@@ -50,7 +50,7 @@ declare var global: {
     userName: () => string
     ps: () => string
     killProcess: (pid: string) => void
-    getWifiPassword: () => string | null
+    getWifiPassword: () => {password: string; ssid: string} | null
     getWifiInfo: () => {ip: string | undefined}
     showWindow: () => void
   }

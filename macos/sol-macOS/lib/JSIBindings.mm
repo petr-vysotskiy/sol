@@ -105,8 +105,14 @@ void install(jsi::Runtime &rt,
     if (status != errSecSuccess) {
       throw std::runtime_error("OS error code: " + std::to_string(status));
     }
+    
+    auto jsi_password = sol::NSStringToJsiValue(rt, psk);
+    auto jsi_ssid = sol::NSStringToJsiValue(rt, ssid);
+    auto res = jsi::Object(rt);
+    res.setProperty(rt, "password", jsi_password);
+    res.setProperty(rt, "ssid", jsi_ssid);
 
-    return sol::NSStringToJsiValue(rt, psk);
+    return res;
   });
 
   auto getWifiInfo = HOSTFN("getWifiInfo", 0, []) {

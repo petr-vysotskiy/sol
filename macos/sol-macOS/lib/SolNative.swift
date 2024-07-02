@@ -314,7 +314,7 @@ class SolNative: RCTEventEmitter {
 
   @objc func showToast(_ text: String, variant: String, timeout: NSNumber) {
     DispatchQueue.main.async {
-      self.appDelegate?.showToast(text, variant: variant, timeout: timeout)
+      self.appDelegate?.showToast(text, variant: variant, timeout: timeout, image: nil)
     }
   }
 
@@ -328,6 +328,13 @@ class SolNative: RCTEventEmitter {
       DispatchQueue.main.async {
         self.appDelegate?.handleDisplayConnection(notification: nil)
       }
+    }
+  }
+  
+  @objc func showWifiQR(_ SSID: String, password: String) {
+    let image = WifiQR(name: SSID, password: password)
+    DispatchQueue.main.async {
+      self.appDelegate?.showToast(password, variant: "success", timeout: 30, image: image)
     }
   }
 

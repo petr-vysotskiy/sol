@@ -549,12 +549,12 @@ export function createBaseItems(store: IRootStore) {
       alias: 'wifi',
       callback: () => {
         try {
-          const password = solNative.getWifiPassword()
-          if (!password) {
+          const res = solNative.getWifiPassword()
+          if (!res) {
             solNative.showToast(`No password found`, 'error')
             return
           }
-          Clipboard.setString(password)
+          Clipboard.setString(res.password)
           solNative.showToast('Password copied to clipboard', 'success')
         } catch (e) {
           solNative.showToast(`Could not retrieve password: ${e}`, 'error')
@@ -568,13 +568,14 @@ export function createBaseItems(store: IRootStore) {
       alias: 'wifi',
       callback: () => {
         try {
-          const password = solNative.getWifiPassword()
-          if (!password) {
+          const res = solNative.getWifiPassword()
+          if (!res) {
             solNative.showToast(`Could not retrieve password`, 'success')
             return
           }
-          Clipboard.setString(password)
-          solNative.showToast(`${password}`, 'success', 30)
+
+          Clipboard.setString(res.password)
+          solNative.showWifiQR(res.ssid, res.password)
         } catch (e) {
           solNative.showToast(`Could not retrieve password: ${e}`, 'error')
         }

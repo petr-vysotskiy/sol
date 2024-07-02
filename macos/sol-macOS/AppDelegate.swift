@@ -558,7 +558,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     }
   }
 
-  func showToast(_ text: String, variant: String, timeout: NSNumber?) {
+  func showToast(_ text: String, variant: String, timeout: NSNumber?, image: NSImage?) {
     guard
       let mainScreen = showWindowOn == "screenWithFrontmost"
         ? toastWindow
@@ -567,7 +567,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
       return
     }
 
-    let toastView = ToastView(text: text, variant: variant == "error" ? .error : .success)
+    let toastView = ToastView(text: text, variant: variant == "error" ? .error : .success, image: image)
 
     let rootView = NSHostingView(rootView: toastView)
     toastWindow.contentView = rootView
