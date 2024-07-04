@@ -1066,16 +1066,14 @@ PODS:
     - RCT-Folly (= 2022.05.16.00)
     - React-Core
     - ReactCommon/turbomodule/core
-  - RNSentry (5.19.2):
+  - RNSentry (5.24.1):
     - hermes-engine
     - React-Core
     - React-hermes
-    - Sentry/HybridSDK (= 8.20.0)
-  - Sentry/HybridSDK (8.20.0):
-    - SentryPrivate (= 8.20.0)
-  - SentryPrivate (8.20.0)
+    - Sentry/HybridSDK (= 8.29.1)
+  - Sentry/HybridSDK (8.29.1)
   - SocketRocket (0.7.0)
-  - Sparkle (2.6.3)
+  - Sparkle (2.6.4)
   - Yoga (1.14.0)
 
 DEPENDENCIES:
@@ -1147,7 +1145,6 @@ SPEC REPOS:
     - KeychainAccess
     - libevent
     - Sentry
-    - SentryPrivate
     - Sparkle
 
 EXTERNAL SOURCES:
@@ -1319,13 +1316,12 @@ SPEC CHECKSUMS:
   RNCAsyncStorage: 826b603ae9c0f88b5ac4e956801f755109fa4d5c
   RNCPicker: b7873ba797dc586bfaf3307d737cbdc620a9ff3e
   RNReanimated: 5307ba390921b76ddf9c0aa69876916ad427a61f
-  RNSentry: 4b80f709293b6277d1718aef4b33ca8195c235de
-  Sentry: a8d7b373b9f9868442b02a0c425192f693103cbf
-  SentryPrivate: 006b24af16828441f70e2ab6adf241bd0a8ad130
+  RNSentry: e9aa15bb2f3e18c822c002eea13bbd3b222ab493
+  Sentry: c446963245407030e17f1b926a83c6337dc99f4e
   SocketRocket: f6c6249082c011e6de2de60ed641ef8bbe0cfac9
-  Sparkle: eab32aa3d9497ca8b64b1ce52cca9ece281fea70
+  Sparkle: 5f8960a7a119aa7d45dacc0d5837017170bc5675
   Yoga: cb2862549a9ebfea848ca356ad5e9b72ea57387a
 
-PODFILE CHECKSUM: 13e4c73ff53f4b3cdcf0834a7e8a5fe3c28d550d
+PODFILE CHECKSUM: a6005cfba2a175eec44a82f369db390d73cc93cf
 
 COCOAPODS: 1.15.2
