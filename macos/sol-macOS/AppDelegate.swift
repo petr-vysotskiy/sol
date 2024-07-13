@@ -119,8 +119,8 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
     mainWindow = Panel(
       contentRect: NSRect(
-        x: 0,
-        y: 0,
+        x: 700,
+        y: 50,
         width: baseSize.width,
         height: baseSize.height
       )
@@ -567,11 +567,12 @@ class AppDelegate: NSObject, NSApplicationDelegate,
       return
     }
 
-    let toastView = ToastView(text: text, variant: variant == "error" ? .error : .success, image: image)
+    let toastView = ToastView(
+      text: text, variant: variant == "error" ? .error : .success, image: image)
 
     let rootView = NSHostingView(rootView: toastView)
     toastWindow.contentView = rootView
-        rootView.wantsLayer = true
+    rootView.wantsLayer = true
 
     if variant == "error" {
       rootView.layer?.backgroundColor =
