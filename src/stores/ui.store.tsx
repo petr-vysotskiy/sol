@@ -732,6 +732,8 @@ export const createUIStore = (root: IRootStore) => {
     },
   })
 
+  solNative.setWindowHeight(50)
+
   Appearance.addChangeListener(store.onColorSchemeChange)
 
   hydrate().then(() => {

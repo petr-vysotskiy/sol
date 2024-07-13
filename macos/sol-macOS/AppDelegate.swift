@@ -516,9 +516,9 @@ class AppDelegate: NSObject, NSApplicationDelegate,
     let yOffset = screen.visibleFrame.height * 0.3
     let y = screen.visibleFrame.midY - CGFloat(finalHeight) + yOffset
 
-    var frame = NSRect(
+    let frame = NSRect(
       x: mainWindow.frame.minX, y: y, width: baseSize.width, height: CGFloat(finalHeight))
-    self.mainWindow.setFrame(frame, display: false)
+    self.mainWindow.setFrame(frame, display: true)
 
     self.rootView.setFrameSize(size)
 
