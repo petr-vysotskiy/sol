@@ -126,6 +126,7 @@ class AppDelegate: NSObject, NSApplicationDelegate,
       )
     )
 
+    rootView.autoresizingMask = [.width, .height]
     mainWindow.contentView?.addSubview(rootView)
 
     let windowRect = NSScreen.main!.frame

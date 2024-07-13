@@ -3,6 +3,8 @@ import Foundation
 let appDelegate = NSApp.delegate as? AppDelegate
 
 final class Panel: NSPanel, NSWindowDelegate {
+  var visualEffectView: NSVisualEffectView!
+
   init(contentRect: NSRect) {
     super.init(
       contentRect: contentRect,
@@ -29,7 +31,7 @@ final class Panel: NSPanel, NSWindowDelegate {
     }
     self.isReleasedWhenClosed = false
     self.delegate = self
-    let visualEffectView = NSVisualEffectView(frame: self.contentView!.bounds)
+    visualEffectView = NSVisualEffectView(frame: self.contentView!.bounds)
     visualEffectView.autoresizingMask = [.width, .height]
     visualEffectView.blendingMode = .behindWindow
     visualEffectView.material = .underWindowBackground
