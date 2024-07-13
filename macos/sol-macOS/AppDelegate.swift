@@ -119,15 +119,23 @@ class AppDelegate: NSObject, NSApplicationDelegate,
 
     mainWindow = Panel(
       contentRect: NSRect(
-        x: 700,
-        y: 50,
+        x: 0,
+        y: 0,
         width: baseSize.width,
-        height: baseSize.height
+        height: baseSize.height / 2
       )
     )
 
     rootView.autoresizingMask = [.width, .height]
-    mainWindow.contentView?.addSubview(rootView)
+    //    rootView.translatesAutoresizingMaskIntoConstraints = false
+    mainWindow.visualEffectView.addSubview(rootView)
+
+    //    NSLayoutConstraint.activate([
+    //      rootView.leadingAnchor.constraint(equalTo: mainWindow.visualEffectView!.leadingAnchor),
+    //      rootView.trailingAnchor.constraint(equalTo: mainWindow.visualEffectView!.trailingAnchor),
+    //      rootView.topAnchor.constraint(equalTo: mainWindow.visualEffectView!.topAnchor),
+    //      rootView.bottomAnchor.constraint(equalTo: mainWindow.visualEffectView!.bottomAnchor)
+    //    ])
 
     let windowRect = NSScreen.main!.frame
     overlayWindow = Overlay(
@@ -361,10 +369,10 @@ class AppDelegate: NSObject, NSApplicationDelegate,
   @objc func showWindow(target: String? = nil) {
     if useBackgroundOverlay {
       if showWindowOn == "screenWithFrontmost" {
-        overlayWindow.setFrame(NSScreen.main!.frame, display: false)
+        overlayWindow.setFrame(NSScreen.main!.frame, display: true)
       } else {
         let screen = getScreenWithMouse()
-        overlayWindow.setFrame(screen!.frame, display: false)
+        overlayWindow.setFrame(screen!.frame, display: true)
       }
 
       overlayWindow.orderFront(nil)
@@ -497,14 +505,25 @@ class AppDelegate: NSObject, NSApplicationDelegate,
       finalHeight = Int(baseSize.height)
     }
 
-    var frame = mainWindow.frame
     let size = NSSize(width: Int(baseSize.width), height: finalHeight)
-    frame.origin.y += (frame.size.height - CGFloat(finalHeight))
-    frame.size = size
+    guard
+      let screen =
+        (showWindowOn == "screenWithFrontmost" ? getFrontmostScreen() : getScreenWithMouse())
+    else {
+      return
+    }
 
-    mainWindow.setFrame(frame, display: false)
-    rootView.setFrameSize(size)
-    rootView.setFrameOrigin(NSPoint(x: 0, y: 0))
+    let yOffset = screen.visibleFrame.height * 0.3
+    let y = screen.visibleFrame.midY - CGFloat(finalHeight) + yOffset
+
+    var frame = NSRect(
+      x: mainWindow.frame.minX, y: y, width: baseSize.width, height: CGFloat(finalHeight))
+    self.mainWindow.setFrame(frame, display: false)
+
+    self.rootView.setFrameSize(size)
+
+    self.rootView.setFrameOrigin(NSPoint(x: 0, y: 0))
+
   }
 
   func setRelativeSize(_ proportion: Double) {

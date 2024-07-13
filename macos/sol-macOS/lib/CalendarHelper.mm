@@ -1,61 +1,72 @@
-#import <Foundation/Foundation.h>
 #import "CalendarHelper.h"
-#import <EventKit/EKEventStore.h>
 
 @implementation CalendarHelper
 
--(void)requestCalendarAccess:(void(^)(void))callback {
-  EKEventStore *store = [[EKEventStore alloc] init];
-  if ( @available(macOS 14.0, *) )
-  {
-    [store requestFullAccessToEventsWithCompletion:^(BOOL granted, NSError * _Nullable error) {
-      if(granted) {
-        callback();
-      } else {
-        NSLog(@"Access not granted %@", error);
-      }
-    }];
+- (instancetype)init {
+  self = [super init];
+  if (self) {
+    _store = [[EKEventStore alloc] init];
   }
-  else
-  {
-    [store requestAccessToEntityType:EKEntityTypeEvent completion:^(BOOL granted, NSError * _Nullable error) {
-      if(granted) {
+  return self;
+}
+
+- (void)requestCalendarAccess:(void (^)(void))callback {
+  if (@available(macOS 14.0, *)) {
+    [_store requestFullAccessToEventsWithCompletion:^(
+                BOOL granted, NSError *_Nullable error) {
+      if (granted) {
         callback();
       } else {
         NSLog(@"Access not granted %@", error);
       }
     }];
+  } else {
+    [_store
+        requestAccessToEntityType:EKEntityTypeEvent
+                       completion:^(BOOL granted, NSError *_Nullable error) {
+                         if (granted) {
+                           callback();
+                         } else {
+                           NSLog(@"Access not granted %@", error);
+                         }
+                       }];
   }
 }
 
--(NSArray<EKEvent *> *)getEvents {
-  EKEventStore *store = [[EKEventStore alloc] init];
-  NSArray *calendars = [store calendarsForEntityType:EKEntityTypeEvent];
-  
-  NSCalendar *gregorian = [[NSCalendar alloc] initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
+- (NSArray<EKEvent *> *)getEvents {
+  NSArray *calendars = [_store calendarsForEntityType:EKEntityTypeEvent];
+
+  NSCalendar *gregorian = [[NSCalendar alloc]
+      initWithCalendarIdentifier:NSCalendarIdentifierGregorian];
   NSDateComponents *fiveDaysComponent = [[NSDateComponents alloc] init];
   fiveDaysComponent.day = 30;
-  NSDate *nextDate = [gregorian dateByAddingComponents:fiveDaysComponent toDate:[NSDate date] options:0];
+  NSDate *nextDate = [gregorian dateByAddingComponents:fiveDaysComponent
+                                                toDate:[NSDate date]
+                                               options:0];
 
-  NSPredicate *predicate = [store predicateForEventsWithStartDate:[NSDate date] endDate:nextDate calendars:calendars];
-  return [store eventsMatchingPredicate:predicate];
+  NSPredicate *predicate = [_store predicateForEventsWithStartDate:[NSDate date]
+                                                           endDate:nextDate
+                                                         calendars:calendars];
+  NSArray<EKEvent *> *events = [_store eventsMatchingPredicate:predicate];
+  return events;
 }
 
--(NSString *)getCalendarAuthorizationStatus {
-  EKAuthorizationStatus status = [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
+- (NSString *)getCalendarAuthorizationStatus {
+  EKAuthorizationStatus status =
+      [EKEventStore authorizationStatusForEntityType:EKEntityTypeEvent];
   switch (status) {
-    case EKAuthorizationStatusDenied:
-      return @"denied";
+  case EKAuthorizationStatusDenied:
+    return @"denied";
 
-    case EKAuthorizationStatusAuthorized:
-      return @"authorized";
+  case EKAuthorizationStatusAuthorized:
+    return @"authorized";
 
-    case EKAuthorizationStatusRestricted:
-      return @"restricted";
+  case EKAuthorizationStatusRestricted:
+    return @"restricted";
 
-    case EKAuthorizationStatusNotDetermined:
-    default:
-      return @"notDetermined";
+  case EKAuthorizationStatusNotDetermined:
+  default:
+    return @"notDetermined";
   }
 }
 

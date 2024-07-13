@@ -3,9 +3,11 @@
 
 #import <EventKit/EKEventStore.h>
 
-@interface CalendarHelper:NSObject
+@interface CalendarHelper : NSObject
 
-- (void)requestCalendarAccess:(void(^)(void))callback;
+@property(nonatomic, strong) EKEventStore *store;
+
+- (void)requestCalendarAccess:(void (^)(void))callback;
 - (NSString *)getCalendarAuthorizationStatus;
 - (NSArray<EKEvent *> *)getEvents;
 

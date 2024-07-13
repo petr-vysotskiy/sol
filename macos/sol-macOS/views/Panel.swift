@@ -31,13 +31,20 @@ final class Panel: NSPanel, NSWindowDelegate {
     }
     self.isReleasedWhenClosed = false
     self.delegate = self
+    self.isOpaque = false
     visualEffectView = NSVisualEffectView(frame: self.contentView!.bounds)
     visualEffectView.autoresizingMask = [.width, .height]
     visualEffectView.blendingMode = .behindWindow
     visualEffectView.material = .underWindowBackground
     visualEffectView.state = .active
-    self.contentView?.addSubview(visualEffectView)
-    self.isOpaque = false
+//    visualEffectView.translatesAutoresizingMaskIntoConstraints = false
+    self.contentView = visualEffectView
+//    NSLayoutConstraint.activate([
+//      visualEffectView.leadingAnchor.constraint(equalTo: self.contentView!.leadingAnchor),
+//      visualEffectView.trailingAnchor.constraint(equalTo: self.contentView!.trailingAnchor),
+//      visualEffectView.topAnchor.constraint(equalTo: self.contentView!.topAnchor),
+//      visualEffectView.bottomAnchor.constraint(equalTo: self.contentView!.bottomAnchor)
+//    ])
   }
 
   override var canBecomeKey: Bool {
