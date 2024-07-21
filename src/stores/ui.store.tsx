@@ -204,21 +204,6 @@ export const createUIStore = (root: IRootStore) => {
     //   \_____\___/|_| |_| |_| .__/ \__,_|\__\___|\__,_|
     //                        | |
     //                        |_|
-    get windowHeight(): number {
-      if (store.focusedWidget !== Widget.SEARCH) {
-        return 0
-      }
-
-      if (
-        store.query === '' &&
-        (!store.calendarEnabled ||
-          store.calendarAuthorizationStatus === 'denied')
-      ) {
-        return 50
-      } else {
-        return 0
-      }
-    },
     get files(): Item[] {
       if (!!store.query && store.focusedWidget === Widget.FILE_SEARCH) {
         runInAction(() => {
@@ -732,7 +717,7 @@ export const createUIStore = (root: IRootStore) => {
     },
   })
 
-  solNative.setWindowHeight(50)
+  // solNative.setWindowHeight(50)
 
   Appearance.addChangeListener(store.onColorSchemeChange)
 

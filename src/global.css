@@ -12,10 +12,16 @@
   .highlight {
     @apply bg-accent dark:bg-accent-dark;
   }
+  .border-window {
+    @apply border-lightBorder dark:border-[#FFFFFF22];
+  }
   .border-color {
     @apply border-lightBorder dark:border-darkBorder;
   }
   .subBg {
     @apply bg-subBgLight dark:bg-subBgDark;
+  }
+  .bg-window {
+    @apply dark:bg-[#00000099] bg-[#FFFFFF33];
   }
 }

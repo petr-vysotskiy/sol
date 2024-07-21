@@ -11,21 +11,29 @@ class BlurView: NSVisualEffectView {
   }
 
   override func didSetProps(_: [String]!) {
-    if(disabled) {
+    if disabled {
       material = .fullScreenUI
       blendingMode = .withinWindow
       return
     }
-    
+
     layer?.cornerRadius = borderRadius
-    if(materialName == "windowBackground") {
+    if materialName == "windowBackground" {
       material = .windowBackground
-    } else if (materialName == "menu") {
+    } else if materialName == "menu" {
       material = .menu
-    } else if (materialName == "sidebar") {
+    } else if materialName == "sidebar" {
       material = .sidebar
-    } else if (materialName == "header") {
+    } else if materialName == "header" {
       material = .headerView
+    } else if materialName == "sheet" {
+      material = .sheet
+    } else if materialName == "popover" {
+      material = .popover
+    } else if materialName == "hudWindow" {
+      material = .hudWindow
+    } else if materialName == "fullScreenUI" {
+      material = .fullScreenUI
     }
   }
 
@@ -35,23 +43,31 @@ class BlurView: NSVisualEffectView {
 
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
-    if(disabled) {
+
+    if disabled {
       material = .fullScreenUI
       blendingMode = .withinWindow
       return
     }
 
-    if(materialName == "windowBackground") {
+    if materialName == "windowBackground" {
       material = .windowBackground
-    } else if (materialName == "menu") {
+    } else if materialName == "menu" {
       material = .menu
-    } else if (materialName == "sidebar") {
+    } else if materialName == "sidebar" {
       material = .sidebar
-    } else if (materialName == "header") {
+    } else if materialName == "header" {
       material = .headerView
+    } else if materialName == "sheet" {
+      material = .sheet
+    } else if materialName == "popover" {
+      material = .popover
+    } else if materialName == "hudWindow" {
+      material = .hudWindow
+    } else if materialName == "fullScreenUI" {
+      material = .fullScreenUI
     }
-    
+
     wantsLayer = true
     layer?.cornerRadius = borderRadius
     layer?.masksToBounds = true

@@ -59,7 +59,7 @@ export const ScratchpadWidget: FC<Props> = observer(({style}) => {
           fontFamily: 'Avenir',
         }}
         placeholder="Write something..."
-        className="flex-1 p-4 -mt-5"
+        className="flex-1 p-4 mt-2"
         multiline
         spellCheck
       />

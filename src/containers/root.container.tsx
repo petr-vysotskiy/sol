@@ -1,9 +1,9 @@
 import clsx from 'clsx'
+import {BlurView} from 'components/BlurView'
 import {FullCalendar} from 'components/FullCalendar'
 import {PermissionsBar} from 'components/PermissionsBar'
-import {solNative} from 'lib/SolNative'
 import {observer} from 'mobx-react-lite'
-import React, {useEffect} from 'react'
+import React from 'react'
 import {View} from 'react-native'
 import {useStore} from 'store'
 import {Widget} from 'stores/ui.store'
@@ -21,95 +21,146 @@ import {TranslationWidget} from 'widgets/translation.widget'
 export let RootContainer = observer(() => {
   let store = useStore()
   let widget = store.ui.focusedWidget
-
-  useEffect(() => {
-    solNative.setWindowHeight(store.ui.windowHeight)
-  }, [store.ui.windowHeight])
+  let blurDisabled = store.ui.reduceTransparency
 
   if (widget === Widget.FILE_SEARCH) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <FileSearchWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <FileSearchWidget />
+        </View>
+      </BlurView>
     )
   }
   if (widget === Widget.CLIPBOARD) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <ClipboardWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <ClipboardWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.EMOJIS) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <EmojisWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <EmojisWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.SCRATCHPAD) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <ScratchpadWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <ScratchpadWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.CREATE_ITEM) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <CreateItemWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <CreateItemWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.ONBOARDING) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <OnboardingWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <OnboardingWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.TRANSLATION) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <TranslationWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <TranslationWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.SETTINGS) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <SettingsWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <SettingsWidget />
+        </View>
+      </BlurView>
     )
   }
 
   if (widget === Widget.PROCESSES) {
     return (
-      <View className="h-full bg-neutral-50/50 dark:bg-neutral-950/50">
-        <ProcessesWidget />
-      </View>
+      <BlurView
+        materialName="popover"
+        disabled={blurDisabled}
+        className="h-full rounded-lg border-window">
+        <View className="bg-window h-full">
+          <ProcessesWidget />
+        </View>
+      </BlurView>
     )
   }
 
   return (
-    <View
-      className={clsx('bg-neutral-50/50 dark:bg-neutral-950/50', {
+    <BlurView
+      materialName="popover"
+      className={clsx('rounded-lg dark:border dark:border-window', {
         'h-full':
           !!store.ui.query ||
           (store.ui.calendarEnabled &&
             store.ui.calendarAuthorizationStatus === 'authorized'),
       })}>
-      <SearchWidget />
+      <View
+        className={clsx('bg-window', {
+          'h-full':
+            !!store.ui.query ||
+            (store.ui.calendarEnabled &&
+              store.ui.calendarAuthorizationStatus === 'authorized'),
+        })}>
+        <SearchWidget />
 
-      {!store.ui.query && store.ui.calendarEnabled && <FullCalendar />}
+        {!store.ui.query && store.ui.calendarEnabled && <FullCalendar />}
 
-      <PermissionsBar />
-    </View>
+        <PermissionsBar />
+      </View>
+    </BlurView>
   )
 })

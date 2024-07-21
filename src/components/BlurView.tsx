@@ -9,14 +9,27 @@ type BlurViewProps = {
   style?: ViewStyle
   borderRadius?: number
   disabled?: boolean
-  materialName?: 'windowBackground' | 'menu' | 'sidebar' | 'header'
+  materialName?:
+    | 'windowBackground'
+    | 'menu'
+    | 'sidebar'
+    | 'header'
+    | 'sheet'
+    | 'popover'
+    | 'hudWindow'
+    | 'fullScreenUI'
   className?: string
 }
 
 export const BlurViewNative = requireNativeComponent<BlurViewProps>('BlurView')
 
 export const BlurView: FC<BlurViewProps> = props => {
-  return <BlurViewNative {...props} />
+  return (
+    <BlurViewNative
+      {...props}
+      materialName={props.materialName ?? 'windowBackground'}
+    />
+  )
 }
 
 cssInterop(BlurView, {

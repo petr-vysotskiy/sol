@@ -122,20 +122,11 @@ class AppDelegate: NSObject, NSApplicationDelegate,
         x: 0,
         y: 0,
         width: baseSize.width,
-        height: baseSize.height / 2
+        height: baseSize.height
       )
     )
 
-    rootView.autoresizingMask = [.width, .height]
-    //    rootView.translatesAutoresizingMaskIntoConstraints = false
-    mainWindow.visualEffectView.addSubview(rootView)
-
-    //    NSLayoutConstraint.activate([
-    //      rootView.leadingAnchor.constraint(equalTo: mainWindow.visualEffectView!.leadingAnchor),
-    //      rootView.trailingAnchor.constraint(equalTo: mainWindow.visualEffectView!.trailingAnchor),
-    //      rootView.topAnchor.constraint(equalTo: mainWindow.visualEffectView!.topAnchor),
-    //      rootView.bottomAnchor.constraint(equalTo: mainWindow.visualEffectView!.bottomAnchor)
-    //    ])
+    mainWindow.contentView = rootView
 
     let windowRect = NSScreen.main!.frame
     overlayWindow = Overlay(
