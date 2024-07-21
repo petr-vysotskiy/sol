@@ -142,7 +142,7 @@ export let RootContainer = observer(() => {
   return (
     <BlurView
       materialName="popover"
-      className={clsx('rounded-lg dark:border dark:border-window', {
+      className={clsx('rounded-xl dark:border dark:border-window', {
         'h-full':
           !!store.ui.query ||
           (store.ui.calendarEnabled &&

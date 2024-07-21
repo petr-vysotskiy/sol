@@ -37,19 +37,4 @@ final class Panel: NSPanel, NSWindowDelegate {
       appDelegate?.hideWindow()
     }
   }
-  //
-  //  override func setFrame(_ frameRect: NSRect, display flag: Bool) {
-  //          super.setFrame(frameRect, display: flag)
-  //          updateShadow()
-  //      }
-  //
-  //      private func updateShadow() {
-  //          let shadow = NSShadow()
-  //          shadow.shadowColor = NSColor.black.withAlphaComponent(0.5)
-  //          shadow.shadowOffset = NSMakeSize(0, -10)
-  //          shadow.shadowBlurRadius = 20.0
-  //
-  //          self.contentView?.wantsLayer = true
-  //          self.contentView?.layer?.shadow = shadow
-  //      }
 }
