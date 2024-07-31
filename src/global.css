@@ -22,6 +22,6 @@
     @apply bg-subBgLight dark:bg-subBgDark;
   }
   .bg-window {
-    @apply dark:bg-[#00000055] bg-[#FFFFFFAA];
+    @apply dark:bg-[#00000044] bg-[#FFFFFFAA];
   }
 }

@@ -76,7 +76,7 @@ export const MainInput = observer<Props>(
           className="text-lg flex-1"
           cursorColor={colorScheme === 'dark' ? colors.white : colors.black}
           placeholder={placeholder}
-          placeholderTextColor={colorScheme === 'dark' ? '#666' : '#888'}
+          placeholderTextColor={colorScheme === 'dark' ? '#555' : '#888'}
         />
       </View>
     )
