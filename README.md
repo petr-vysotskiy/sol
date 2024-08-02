@@ -54,6 +54,39 @@ Or manually download the latest [release](https://github.com/ospfranco/sol/tree/
 - Blacken Menu Bar
 - Quickly evaluate math operations
 
+## Contributing
+
+You need to set up your machine for macOS development with React Native. Basically you need to install:
+
+- Xcode
+- Node (I suggest you use mise)
+- Watchman
+- Ruby 3.x (I suggest you use mise again)
+- Cocoapods
+
+Follow any of the online tutorials to set up your machine for iOS/MacOS React Native development.
+
+Once you have everything installed run the following commands
+
+```sh
+corepack enable # Allows to turn yarn without the need to install it separately
+yarn
+yarn pods
+yarn macos
+```
+
+or
+
+```sh
+corepack enable
+yarn
+yarn pods
+
+# and then open the sol.xcworkspace in Xcode and run the app from there
+```
+
+App is signed with my personal team, so you will have an error there you can ignore as long as you are not packaging the app. But please don't change it, otherwise your PR will be dirty.
+
 ## License
 
 MIT License
